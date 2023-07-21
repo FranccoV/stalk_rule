@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://www.lncc.br/~borges/php/testar.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matrix Background</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    #content {
+      text-align: center;
+    }
+
+    #text-box {
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    #button {
+      padding: 10px 20px;
+      font-size: 24px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #text {
+      font-size: 18px;
+      display: none;
+    }
+    
+    #link {
+      font-size: 14px;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix" width="1879" height="962"></canvas>
+  <div id="content">
+    <div id="text-box">
+      <p id="text" style="display: none;">Nunca revele seus métodos</p>
+      <div id="button-container">
+        <button id="button">&#128034;</button>
+        <a href="https://www.google.com/" target="_blank" id="link">Clique aqui para visitar o Google</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    let matrixStream = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+
+    function setCanvasSize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      fontSize = 16;
+      columns = canvas.width / fontSize;
+      drops = [];
+      for (let i = 0; i < columns; i++) drops[i] = 1;
+    }
+
+    window.addEventListener('resize', setCanvasSize);
+    setCanvasSize();
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0F0';
+      ctx.font = fontSize + 'px arial';
+      for (let i = 0; i < drops.length; i++) {
+        let text = matrixStream[Math.floor(Math.random() * matrixStream.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 50);
+
+    const button = document.getElementById('button');
+    const text = document.getElementById('text');
+    const link = document.getElementById('link');
+
+    button.addEventListener('click', () => {
+      text.style.display = 'block';
+      link.style.display = 'block';
+      button.style.display = 'none';
+    });
+
+    // Desativar o menu de contexto padrão do botão direito do mouse no canvas
+    canvas.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
+    });
+  </script>
+
+
+</body></html>
