@@ -46,6 +46,12 @@
       font-size: 18px;
       display: none;
     }
+    
+    #link {
+      font-size: 14px;
+      margin-top: 10px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -55,6 +61,7 @@
       <p id="text" style="display: none;">Nunca revele seus métodos</p>
       <div id="button-container">
         <button id="button">🐢</button>
+        <a href="https://www.google.com" target="_blank" id="link">Clique aqui para visitar o Google</a>
       </div>
     </div>
   </div>
@@ -100,9 +107,11 @@
 
     const button = document.getElementById('button');
     const text = document.getElementById('text');
+    const link = document.getElementById('link');
 
     button.addEventListener('click', () => {
       text.style.display = 'block';
+      link.style.display = 'block';
       button.style.display = 'none';
     });
   </script>
