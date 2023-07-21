@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<!-- saved from url=(0043)https://www.lncc.br/~borges/php/testar.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-  
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matrix Background</title>
+  <title>Regras</title>
   <style>
     body {
       display: flex;
@@ -55,13 +55,13 @@
   </style>
 </head>
 <body>
-  <canvas id="matrix" width="1879" height="962"></canvas>
+  <canvas id="matrix"></canvas>
   <div id="content">
     <div id="text-box">
-      <p id="text" style="display: none;">Nunca revele seus métodos</p>
+      <p id="text" style="display: none;">Nunca revele seus mÃ©todos</p>
       <div id="button-container">
-        <button id="button">&#128034;</button>
-        <a href="https://www.google.com/" target="_blank" id="link">Clique aqui para visitar o Google</a>
+        <button id="button">ðŸ¢</button>
+        <a href="https://www.google.com" target="_blank" id="link">Clique aqui para visitar o Google</a>
       </div>
     </div>
   </div>
@@ -107,12 +107,9 @@
       link.style.display = 'block';
       button.style.display = 'none';
     });
-
-    // Desativar o menu de contexto padrão do botão direito do mouse no canvas
     canvas.addEventListener('contextmenu', (event) => {
       event.preventDefault();
     });
   </script>
-
-
-</body></html>
+</body>
+</html>
