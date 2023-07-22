@@ -3,13 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matrix Background</title>
+  <title>🌹✨</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"> <!-- Importando a fonte "Pacifico" do Google Fonts -->
   <style>
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
       overflow: hidden;
     }
@@ -24,95 +21,93 @@
     }
 
     #content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
-    }
-
-    #text-box {
-      padding: 20px;
-      background-color: rgba(255, 255, 255, 0.8);
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-
-    #button {
-      padding: 10px 20px;
-      font-size: 24px;
-      background-color: #4CAF50;
       color: white;
-      border: none;
-      cursor: pointer;
     }
 
-    #text {
-      font-size: 18px;
-      display: none;
+    #fixedText {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-family: 'Arial', sans-serif;
     }
-    
-    #link {
-      font-size: 14px;
-      margin-top: 10px;
+
+    #title {
+      font-family: 'Pacifico', cursive; /* Fonte personalizada "Pacifico" para as palavras da animação */
+    }
+
+    #repeatButton {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: transparent;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
       display: none;
     }
   </style>
 </head>
 <body>
-  <canvas id="matrix"></canvas>
+  <canvas id="moon"></canvas>
   <div id="content">
-    <div id="text-box">
-      <p id="text" style="display: none;">Nunca revele seus métodos</p>
-      <div id="button-container">
-        <button id="button">🐢</button>
-        <a href="https://www.google.com" target="_blank" id="link">Clique aqui para visitar o Google</a>
-      </div>
-    </div>
+    <p id="fixedText">Para Amanda Elpidio</p>
+    <h1 id="title"></h1>
+    <button id="repeatButton">Repetir Animação</button>
   </div>
 
   <script>
-    const canvas = document.getElementById('matrix');
+    const canvas = document.getElementById('moon');
     const ctx = canvas.getContext('2d');
-    let matrixStream = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+    let moonImage = new Image();
+    moonImage.src = 'https://mfiles.alphacoders.com/999/999881.jpg';
 
     function setCanvasSize() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      fontSize = 16;
-      columns = canvas.width / fontSize;
-      drops = [];
-      for (let i = 0; i < columns; i++) {
-        drops[i] = 1;
-      }
     }
 
     window.addEventListener('resize', setCanvasSize);
     setCanvasSize();
 
-    function drawMatrix() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    function drawMoon() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(moonImage, 0, 0, canvas.width, canvas.height);
+    }
 
-      ctx.fillStyle = '#0F0';
-      ctx.font = fontSize + 'px arial';
-      for (let i = 0; i < drops.length; i++) {
-        let text = matrixStream[Math.floor(Math.random() * matrixStream.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    moonImage.onload = () => {
+      drawMoon();
+    };
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
+    const title = document.getElementById('title');
+    const text = 'Obrigado por não desistir de mim e continuar aqui mesmo comigo sendo às vezes chato ❤️';
+    let index = 0;
 
-        drops[i]++;
+    function typeText() {
+      title.textContent = text.slice(0, index);
+      index++;
+
+      if (index <= text.length) {
+        setTimeout(typeText, 100);
+      } else {
+        document.getElementById('repeatButton').style.display = 'inline';
       }
     }
 
-    setInterval(drawMatrix, 50);
+    typeText();
 
-    const button = document.getElementById('button');
-    const text = document.getElementById('text');
-    const link = document.getElementById('link');
+    const repeatButton = document.getElementById('repeatButton');
+    repeatButton.addEventListener('click', () => {
+      index = 0;
+      typeText();
+      repeatButton.style.display = 'none';
+    });
 
-    button.addEventListener('click', () => {
-      text.style.display = 'block';
-      link.style.display = 'block';
-      button.style.display = 'none';
+    canvas.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
     });
   </script>
 </body>
